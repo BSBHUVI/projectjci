@@ -1,21 +1,42 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import defaultimg from '../images/default.jpg'
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import axios from 'axios';
 import '../styles/ProductForm.css'
 import { useMyDataContext } from '../context/DataContext';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 
 
 function ProductForm() {
+  const navigate=useNavigate()
+
+  const {department}=useMyDataContext()
+  const [user,setUser]=useState("")
+  useState(()=>{
+     const name=localStorage.getItem("userName")
+     setUser(name)
+  },[])
+
+  useEffect(()=>{
+   if(!department.includes("admin")){
+  navigate("/home")
+   }
+  },[navigate,department])
+  useEffect(()=>{
+    let a=localStorage.getItem("isLoggedIn")
+    if(!a){
+       navigate("/") 
+    }
+},[navigate])
   const {changeData}=useMyDataContext()
  
-const navigate=useNavigate()
+
   const [productName, setProductName] = useState("");
   const [productPrice, setProductPrice] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [quantity,setQuantity]=useState("")
+  const {location}=useMyDataContext();
   const [img1,setImg1]=useState(()=>({
     imageName:"",
     imageSrc:defaultimg,
@@ -54,10 +75,13 @@ const handleSubmit=(e)=>{
   formdata.append("Name",productName);
   formdata.append("Description",productDescription);
   formdata.append("Img",img1.imageFile)
- 
+  formdata.append("Poster",user)
   formdata.append("ImageName","imageName1")
   formdata.append("Price",productPrice)
   formdata.append("Quantity",quantity)
+  formdata.append("Location",location)
+  formdata.append("Department",JSON.stringify(department))
+  
   
 
 axios.post("https://localhost:7105/api/Product",formdata).then(()=>{
@@ -70,6 +94,7 @@ axios.post("https://localhost:7105/api/Product",formdata).then(()=>{
 
   return (
     <div className='post_container'>
+   
       <form onSubmit={handleSubmit} className='post_form_container form'>
  <h2 className='post_furniture_heading'>Post Product</h2>
  <input value={productName} onChange={e=>setProductName(e.target.value)} type='text' placeholder='Enter the name of furniture' required/>

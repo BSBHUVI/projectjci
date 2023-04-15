@@ -1,0 +1,84 @@
+h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+/* Styling for the container div */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    background-color: #fff;
+    max-width: 700px;
+}
+
+/* Styling for the product image */
+.firstContainer img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    margin-bottom: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 2px 6px;
+}
+
+/* Styling for the product name */
+.firstContainer p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+/* Styling for the product price and quantity section */
+.secondContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5rem;
+    border-top: 1px solid #ccc;
+    padding-top: 0.5rem;
+}
+
+.secondContainer p {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: #666;
+}
+
+/* Styling for the quantity buttons */
+.secondContainer button,.secondContainer button:last-child{
+    font-size: 1.25rem;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+
+    border: 1px solid #ccc;
+    margin: 0 0.5rem;
+    color: #5c62cf;
+    cursor: pointer;
+    
+}
+
+.secondContainer button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Styling for the order button */
+
+
+
+.quan{
+    background-color: white !important;
+    color: black !important;
+}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {TextField,Button} from "@mui/material"
 import "../styles/Login.css"
 import { Link, useNavigate } from "react-router-dom";
@@ -11,7 +11,12 @@ function Login() {
       const [password, setPassword] = useState("");
       const navigate=useNavigate()
       const {setLocation,setUserName,setDepartment}=useMyDataContext()
-    
+    useEffect(()=>{
+if(localStorage.getItem("isLoggedIn")){
+   navigate("/home")
+}
+
+    },[navigate])
       const handleSubmit = (event) => {
         event.preventDefault();
         axios.post("https://localhost:7105/api/Auth/login",{
@@ -29,9 +34,13 @@ function Login() {
 setDepartment(res.data)
             })
           }).then(()=>{
+            localStorage.setItem("isLoggedIn", true);
+          }).then(()=>{
+            localStorage.setItem("userName",email)
+          }).then(()=>{
             navigate("/home")
           }).catch((err)=>{
-            
+             alert("invalid Credentails")
           })
         
       };

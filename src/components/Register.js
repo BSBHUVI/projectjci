@@ -50,7 +50,7 @@ if(registerFormData.Password===registerFormData.ConfirmPassword){
       }).then(()=>{
         axios.post(`https://localhost:7105/api/Auth/userTorole/${registerFormData.Department}/${registerFormData.UserName}`)
       }).then(()=>{
-       navigate("/login")
+       navigate("/")
       }).catch((err)=>{
         alert(err.message)
       })

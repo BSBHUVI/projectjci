@@ -1,0 +1,28 @@
+const [searchResult, setSearchResult] = useState([]);
+
+  const handleSearch = () => {
+    const search = ref.current.value;
+    // filter products based on location and searchTerm
+    let filteredProducts = [];
+    if (search) {
+      filteredProducts = products.filter((product) => {
+        if (product.location === "Banglore") {
+          return product.name.toLowerCase().includes(search.toLowerCase());
+        }
+        return false;
+      });
+    }
+    if (!filteredProducts.length && search && "location" !== "allLocations") {
+      // if no products found in the selected location, show all products
+      filteredProducts = products.filter((product) =>
+        product.name.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+    if (!filteredProducts.length) {
+      filteredProducts = products.filter((product) =>
+        product.name.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+
+    setSearchResult(filteredProducts);
+  };
